@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portal Kelas</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a1628;
+      color: #e0e8f0;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 240px;
+      background: #0d1f3c;
+      border-right: 1px solid #1e3a5f;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px 16px;
+      border-bottom: 1px solid #1e3a5f;
+    }
+
+    .sidebar-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-header p {
+      font-size: 11px;
+      color: #6b8cad;
+      margin-top: 3px;
+    }
+
+    .sidebar-section {
+      padding: 16px 12px 8px;
+    }
+
+    .sidebar-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #4a6b8a;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 0 8px;
+      margin-bottom: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.1s;
+      color: #8aaec8;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      background: #1a3557;
+      color: #c8dff0;
+      transform: translateX(3px);
+    }
+
+    .nav-item.active {
+      background: #1a4a7a;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .nav-item.active .nav-icon {
+      color: #4da6ff;
+    }
+
+    .nav-icon {
+      font-size: 17px;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 36px 40px;
+      background: #0f1e35;
+    }
+
+    .page { display: none; animation: fadeIn 0.3s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      margin-bottom: 32px;
+    }
+
+    .page-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .page-header p {
+      color: #6b8cad;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1e3a5f;
+      margin: 16px 0 28px;
+    }
+
+    /* ── MAIN PAGE ── */
+    .welcome-card {
+      background: linear-gradient(135deg, #1a3a6e 0%, #0d2a52 100%);
+      border: 1px solid #2a4f7a;
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .welcome-card h2 {
+      font-size: 22px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .welcome-card p {
+      color: #8aaec8;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .info-card {
+      background: #0d1f3c;
+      border: 1px solid #1e3a5f;
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .info-card:hover {
+      border-color: #2a6ab5;
+      transform: translateY(-3px);
+    }
+
+    .info-card .label {
+      font-size: 11px;
+      color: #4a6b8a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .info-card .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #4da6ff;
+    }
+
+    .info-card .sub {
+      font-size: 12px;
+      color: #6b8cad;
+      margin-top: 3px;
+    }
+
+    /* ── CHART (ORG CHART) ── */
+    .org-chart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .org-level {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .org-box {
+      background: #0d1f3c;
+      border: 1.5px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 12px 18px;
+      text-align: center;
+      min-width: 130px;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .org-box:hover {
+      border-color: #4da6ff;
+      background: #122840;
+      transform: translateY(-3px);
+    }
+
+    .org-box.highlight {
+      border-color: #2a6ab5;
+      background: #1a3a6e;
+    }
+
+    .org-box .role {
+      font-size: 10px;
+      color: #4da6ff;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+
+    .org-box .name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e0e8f0;
+    }
+
+    .org-connector {
+      width: 1px;
+      height: 24px;
+      background: #1e3a5f;
+      margin: 0 auto;
+    }
+
+    .org-connector-h {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 0;
+    }
+
+    .org-connector-h::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 1px;
+      background: #1e3a5f;
+      left: 50%;
+      right: 50%;
+    }
+
+    .ajk-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .ajk-row .org-box {
+      min-width: 110px;
+      background: #0d1a2e;
+    }
+
+    /* ── LIST NAME ── */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: #0d1f3c;
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 10px 16px;
+      gap: 10px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .search-bar:focus-within {
+      border-color: #2a6ab5;
+    }
+
+    .search-bar input {
+      background: none;
+      border: none;
+      outline: none;
+      color: #e0e8f0;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .search-bar input::placeholder { color: #4a6b8a; }
+
+    .student-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .student-item {
+      background: #0d1f3c;
+      border: 1px solid #1e3a5f;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .student-item:hover {
+      border-color: #2a6ab5;
+      transform: translateX(3px);
+    }
+
+    .student-num {
+      width: 28px;
+      height: 28px;
+      background: #1a3557;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #4da6ff;
+      flex-shrink: 0;
+    }
+
+    .student-name {
+      font-size: 13px;
+      color: #c8dff0;
+    }
+
+    /* ── TEACHER NAME ── */
+    .teacher-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .teacher-card {
+      background: #0d1f3c;
+      border: 1px solid #1e3a5f;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .teacher-card:hover {
+      border-color: #4da6ff;
+      transform: translateY(-4px);
+    }
+
+    .teacher-card-header {
+      background: #1a3557;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .teacher-avatar {
+      width: 52px;
+      height: 52px;
+      background: #0d2a52;
+      border: 2px solid #2a6ab5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #4da6ff;
+      margin: 0 auto 10px;
+    }
+
+    .teacher-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .teacher-card-body {
+      padding: 14px 16px;
+    }
+
+    .teacher-subject-badge {
+      display: inline-block;
+      background: #1a3a6e;
+      color: #7ab8f5;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin: 3px 3px 0 0;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .modal {
+      background: #0d1f3c;
+      border: 1px solid #2a4f7a;
+      border-radius: 16px;
+      padding: 32px;
+      width: 380px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #1a3557;
+      border: none;
+      color: #8aaec8;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .modal-close:hover { background: #2a5580; color: #fff; }
+
+    .modal-avatar {
+      width: 64px;
+      height: 64px;
+      background: #1a3a6e;
+      border: 2px solid #4da6ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 700;
+      color: #4da6ff;
+      margin: 0 auto 16px;
+    }
+
+    .modal h3 {
+      text-align: center;
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .modal-detail {
+      border-top: 1px solid #1e3a5f;
+      padding-top: 16px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #1a3557;
+      font-size: 13px;
+    }
+
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { color: #4a6b8a; flex-shrink: 0; }
+    .detail-value { color: #c8dff0; text-align: right; max-width: 220px; }
+
+    /* ── JADUAL ── */
+    .jadual-container {
+      background: #0d1f3c;
+      border: 1px solid #1e3a5f;
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .jadual-container img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid #1e3a5f;
+    }
+
+    .jadual-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #4a6b8a;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>📚 Kelas Saya</h2>
+    <p> 2 Cempaka</p>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Menu</div>
+    <div class="nav-item active" onclick="showPage('main', this)">
+      <span class="nav-icon">🏠</span> Main
+    </div>
+    <div class="nav-item" onclick="showPage('chart', this)">
+      <span class="nav-icon">📊</span> Chart
+    </div>
+    <div class="nav-item" onclick="showPage('listname', this)">
+      <span class="nav-icon">👥</span> List Name
+    </div>
+    <div class="nav-item" onclick="showPage('teacher', this)">
+      <span class="nav-icon">👩‍🎓</span> Teacher Name
+    </div>
+    <div class="nav-item" onclick="showPage('jadual', this)">
+      <span class="nav-icon">🗓️</span> Jadual Kelas
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- PAGE: MAIN -->
+  <div id="page-main" class="page active">
+    <div class="page-header">
+      <h1>Selamat Datang 👋</h1>
+      <p>Portal rasmi Kelas  2 Cempaka</p>
+    </div>
+    <div class="divider"></div>
+    <div class="welcome-card">
+      <h2> 2 Cempaka </h2>
+      <p>Selamat datang ke portal kelas kami. Di sini anda boleh melihat carta organisasi kelas, senarai nama murid, maklumat guru, dan jadual waktu kelas. Gunakan menu di sebelah kiri untuk navigasi.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Jumlah Murid</div>
+        <div class="value">29</div>
+        <div class="sub">Pelajar aktif</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Jumlah Guru</div>
+        <div class="value">11</div>
+        <div class="sub">Guru mengajar</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Sesi</div>
+        <div class="value">2026</div>
+        <div class="sub">Tahun akademik</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: CHART -->
+  <div id="page-chart" class="page">
+    <div class="page-header">
+      <h1>Carta Organisasi Kelas</h1>
+      <p>Struktur jawatan dalam  2 Cempaka</p>
+    </div>
+    <div class="divider"></div>
+    <div class="org-chart">
+
+      <div class="org-level">
+        <div class="org-box highlight">
+          <div class="role">Guru Kelas</div>
+          <div class="name">NURFADILAH BINTI ISMAIL</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <div class="org-level">
+        <div class="org-box highlight">
+          <div class="role">Penolong Guru Kelas</div>
+          <div class="name">NOR SYAREAH BINTI MUHAMMAD</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <div class="org-level">
+        <div class="org-box">
+          <div class="role">Ketua Kelas</div>
+          <div class="name">Che Zaimhaikal 'Izz</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <div class="org-level">
+        <div class="org-box">
+          <div class="role">Penolong Ketua Kelas</div>
+          <div class="name">Nur Amni Sulha</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <div class="org-level" style="gap:20px">
+        <div class="org-box">
+          <div class="role">Setiausaha</div>
+          <div class="name">Nor Syakiren</div>
+        </div>
+        <div class="org-box">
+          <div class="role">Naib Setiausaha</div>
+          <div class="name">Qaseh Qalisya</div>
+        </div>
+        <div class="org-box">
+          <div class="role">Bendahari</div>
+          <div class="name">Nur Elisya Umairah</div>
+        </div>
+        <div class="org-box">
+          <div class="role">Naib Bendahari</div>
+          <div class="name">Izzara Insyirah</div>
+        </div>
+      </div>
+
+      <div class="org-connector"></div>
+
+      <div style="font-size:11px;color:#4a6b8a;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">AJK Kelas</div>
+      <div class="ajk-row">
+        <div class="org-box">
+          <div class="role">AJK 1</div>
+          <div class="name">Syakir Akalil</div>
+        </div>
+        <div class="org-box">
+          <div class="role">AJK 2</div>
+          <div class="name">Naqib Najmi</div>
+        </div>
+        <div class="org-box">
+          <div class="role">AJK 3</div>
+          <div class="name">Izzara</div>
+        </div>
+        <div class="org-box">
+          <div class="role">AJK 4</div>
+          <div class="name">Aisyah</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PAGE: LIST NAME -->
+  <div id="page-listname" class="page">
+    <div class="page-header">
+      <h1>Senarai Nama Murid</h1>
+      <p>Semua pelajar  2 Cempaka</p>
+    </div>
+    <div class="divider"></div>
+    <div class="search-bar">
+      <span style="color:#4a6b8a">🔍</span>
+      <input type="text" id="searchInput" placeholder="Cari nama murid..." oninput="filterStudents()" />
+    </div>
+    <div class="student-list" id="studentList"></div>
+  </div>
+
+  <!-- PAGE: TEACHER NAME -->
+  <div id="page-teacher" class="page">
+    <div class="page-header">
+      <h1>Senarai Guru</h1>
+      <p>Klik pada kad guru untuk melihat maklumat lanjut</p>
+    </div>
+    <div class="divider"></div>
+    <div class="teacher-grid" id="teacherGrid"></div>
+  </div>
+
+  <!-- PAGE: JADUAL -->
+  <div id="page-jadual" class="page">
+    <div class="page-header">
+      <h1>Jadual Waktu Kelas</h1>
+      <p>Jadual rasmi  2 Cempaka</p>
+    </div>
+    <div class="divider"></div>
+    <div class="jadual-container">
+      <img src="jadual.jpg" alt="Jadual Kelas" />
+      <p class="jadual-note">* Jadual waktu adalah tertakluk kepada perubahan pihak sekolah.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL TEACHER DETAIL -->
+<div class="modal-overlay" id="teacherModal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('teacherModal').classList.remove('open')">✕</button>
+    <div class="modal-avatar" id="modalAvatar"></div>
+    <h3 id="modalName"></h3>
+    <div class="modal-detail" id="modalDetail"></div>
+  </div>
+</div>
+
+<script>
+  // ── DATA MURID ──
+  const students = [
+    "Che Ashraaf Zakwan", "Che Zaimhaikal 'izz", "Dhea Alisya", "Muhammad Syakir Akalil", "Nik Muhammand Ikhwan", "Muhammad Aqib Rizqin", "Muhammad Irman Rifqi", "Muhammad Syahiran Mukmin", "Muhammad Naqib Najmi", "Farhan", "Nor Syakiren", "Nur Elisya Umairah", "Nur Zara Batrisya", "Nur Mia Atiesya", "Nur Lydia Delisya", "Nur Izzara Insyirah", "Nur Aisyah Robayah", "Nur Dieyan Arissa", "Nur Qaseh Qalisya", "Nur Zara Humaira", "Nur Amalina Batrisya", "Nur Najmina Suhada", "Nur Aida Zafarina", "Nur Puteri Balqis", "Nur Amni Sulha", "Nur Izzara Aisyah", "Nur Wardina Al-Zahra", "Muhammad Ilham Uzair"
+  ];
+
+  // ── DATA GURU ──
+  const teachers = [
+    { name: "NURFADILAH BINTI ISMAIL",   subjects: ["Bahasa Inggeris"],            info: "Guru Kelas" },
+    { name: "NOR SYAREAH BINTI MUHAMMAD",     subjects: ["Bahasa Melayu"],                info: "Penolong Guru Kelas" },
+    { name: "ROSASLIZA BT ABD LLAH",           subjects: ["ASK & SAINS"],       info: "Guru ASK & SAINS" },
+    { name: "AMIRATUL FATIHAH BINTI AZUHAN",            subjects: ["Bahasa Arab"],            info: "Guru Praktikal BA" },
+    { name: "NOR AZIZON BT MOHAMMAD YUSOFF",     subjects: ["Bahasa Arab"],                    info: "Guru Bahasa Arab" },
+    { name: "MOHAMAD AMIRUL HASAN BIN IDRIS",          subjects: ["GEOGRAFI"],                  info: "Guru Praktikal GEO" },
+    { name: "MOHAMAD BIN ISMAIL",        subjects: ["GEOGRAFI"],         info: "Guru Geografi" },
+    { name: "ROHANA BINTI HUSSIN",           subjects: ["KKQ"],       info: "Guru KKQ" },
+    { name: "ZAUNAIDAH BINTI ABDDUL RAHMAN",           subjects: ["MATEMATIK"],       info: "Guru MT" },
+    { name: "NUR ILYANI BT HUSSIN",           subjects: ["RBT"],       info: "Guru RBT" },
+    { name: "NAJIAH BT ABD GHANI",           subjects: ["SEJARAH"],       info: "Guru SEJ" },
+  ];
+
+  // ── RENDER STUDENTS ──
+  function renderStudents(list) {
+    const container = document.getElementById('studentList');
+    container.innerHTML = list.map((name, i) => `
+      <div class="student-item">
+        <div class="student-num">${(i + 1).toString().padStart(2,'0')}</div>
+        <div class="student-name">${name}</div>
+      </div>
+    `).join('');
+  }
+  renderStudents(students);
+
+  function filterStudents() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    renderStudents(students.filter(n => n.toLowerCase().includes(q)));
+  }
+
+  // ── RENDER TEACHERS ──
+  const grid = document.getElementById('teacherGrid');
+  teachers.forEach((t, i) => {
+    const initials = t.name.split(' ').slice(-2).map(w => w[0]).join('').toUpperCase();
+    grid.innerHTML += `
+      <div class="teacher-card" onclick="openModal(${i})">
+        <div class="teacher-card-header">
+          <div class="teacher-avatar">${initials}</div>
+          <div class="teacher-card-name">${t.name}</div>
+        </div>
+        <div class="teacher-card-body">
+          ${t.subjects.map(s => `<span class="teacher-subject-badge">${s}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  // ── MODAL ──
+  function openModal(i) {
+    const t = teachers[i];
+    const initials = t.name.split(' ').slice(-2).map(w => w[0]).join('').toUpperCase();
+    document.getElementById('modalAvatar').textContent = initials;
+    document.getElementById('modalName').textContent = t.name;
+    document.getElementById('modalDetail').innerHTML = `
+      <div class="detail-row">
+        <span class="detail-label">Nama Penuh</span>
+        <span class="detail-value">${t.name}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Subjek Diajar</span>
+        <span class="detail-value">${t.subjects.join(', ')}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Maklumat</span>
+        <span class="detail-value">${t.info}</span>
+      </div>
+    `;
+    document.getElementById('teacherModal').classList.add('open');
+  }
+
+  function closeModal(e) {
+    if (e.target.id === 'teacherModal')
+      document.getElementById('teacherModal').classList.remove('open');
+  }
+
+  // ── NAVIGATION ──
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
