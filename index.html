@@ -372,9 +372,7 @@
       color: #ffffff;
     }
 
-    .teacher-card-body {
-      padding: 14px 16px;
-    }
+    .teacher-card-body { padding: 14px 16px; }
 
     .teacher-subject-badge {
       display: inline-block;
@@ -488,41 +486,30 @@
     }
 
     /* ── MEMORY ── */
-    .memory-upload-area {
-    border: 2px dashed #1e3a5f;
-    border-radius: 14px;
-    padding: 40px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    margin-bottom: 28px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    }
-
-    .memory-upload-area:hover {
-      border-color: #4da6ff;
+    .memory-info-box {
       background: #0d1f3c;
-    }
-
-    .memory-upload-area .upload-icon {
-      font-size: 40px;
-      margin-bottom: 12px;
-    }
-
-    .memory-upload-area p {
+      border: 1px solid #1e3a5f;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      font-size: 13px;
       color: #6b8cad;
-      font-size: 14px;
+      line-height: 1.8;
     }
 
-    .memory-upload-area span {
+    .memory-info-box strong {
       color: #4da6ff;
-      font-weight: 600;
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
     }
 
-    .memory-upload-area input[type="file"] {
-      display: none;
+    .memory-info-box code {
+      background: #1a3557;
+      color: #7ab8f5;
+      padding: 1px 7px;
+      border-radius: 5px;
+      font-size: 12px;
     }
 
     .memory-filter {
@@ -571,14 +558,14 @@
 
     .memory-item img {
       width: 100%;
-      height: 150px;
+      height: 160px;
       object-fit: cover;
       display: block;
     }
 
     .memory-item video {
       width: 100%;
-      height: 150px;
+      height: 160px;
       object-fit: cover;
       display: block;
       background: #000;
@@ -608,37 +595,25 @@
       flex-shrink: 0;
     }
 
-    .badge-img {
-      background: #1a3a6e;
-      color: #4da6ff;
-    }
-
-    .badge-vid {
-      background: #2a1a3e;
-      color: #a07af5;
-    }
+    .badge-img { background: #1a3a6e; color: #4da6ff; }
+    .badge-vid { background: #2a1a3e; color: #a07af5; }
 
     .memory-empty {
       text-align: center;
       padding: 60px 0;
       color: #4a6b8a;
+      grid-column: 1 / -1;
     }
 
-    .memory-empty .empty-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-
-    .memory-empty p {
-      font-size: 14px;
-    }
+    .memory-empty .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .memory-empty p { font-size: 14px; }
 
     /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.92);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -652,7 +627,7 @@
 
     .lightbox img, .lightbox video {
       max-width: 90vw;
-      max-height: 80vh;
+      max-height: 82vh;
       border-radius: 10px;
       object-fit: contain;
     }
@@ -680,19 +655,26 @@
       margin-top: 14px;
     }
 
-    .delete-btn {
-      background: #2a1a1a;
-      border: 1px solid #5f1e1e;
-      color: #f57a7a;
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 12px;
+    .lightbox-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .nav-btn {
+      background: #1a3557;
+      border: none;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
       transition: background 0.2s;
     }
 
-    .delete-btn:hover { background: #3a2020; }
+    .nav-btn:hover { background: #2a5580; }
+    .nav-btn:disabled { opacity: 0.3; cursor: default; }
   </style>
 </head>
 <body>
@@ -880,11 +862,8 @@
     </div>
     <div class="divider"></div>
 
-    <div class="memory-upload-area" onclick="document.getElementById('memoryUpload').click()">
-      <div class="upload-icon">📁</div>
-      <p><span>klik untuk muat naik</span></p>
-      <p style="font-size:12px; margin-top:6px;">Sokong: JPG, PNG, GIF, MP4, MOV, WEBM</p>
-      <input type="file" id="memoryUpload" accept="image/*,video/*" multiple onchange="handleUpload(event)" />
+    <div class="memory-info-box">
+      <strong>📸 UNTUK MELETAK GAMBAR DISINI ANDA PERLULAH PERSONAL MESSAGE (PM) ADMIN </strong>
     </div>
 
     <div class="memory-filter">
@@ -893,12 +872,7 @@
       <button class="filter-btn" onclick="filterMemory('video', this)">🎬 Video</button>
     </div>
 
-    <div class="memory-grid" id="memoryGrid">
-      <div class="memory-empty" id="memoryEmpty">
-        <div class="empty-icon">🗂️</div>
-        <p>Tiada kenangan lagi. Muat naik gambar atau video!</p>
-      </div>
-    </div>
+    <div class="memory-grid" id="memoryGrid"></div>
   </div>
 
 </div>
@@ -913,12 +887,15 @@
   </div>
 </div>
 
-<!-- LIGHTBOX MEMORY -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('open')">✕</button>
   <div id="lightboxContent"></div>
   <p class="lightbox-name" id="lightboxName"></p>
-  <button class="delete-btn" id="lightboxDelete">🗑️ Padam</button>
+  <div class="lightbox-nav">
+    <button class="nav-btn" id="btnPrev" onclick="navigateLight(-1)">◀</button>
+    <button class="nav-btn" id="btnNext" onclick="navigateLight(1)">▶</button>
+  </div>
 </div>
 
 <script>
@@ -945,6 +922,22 @@
     { name: "NUR ILYANI BT HUSSIN",                subjects: ["RBT"],              info: "Guru RBT" },
     { name: "NAJIAH BT ABD GHANI",                 subjects: ["SEJARAH"],          info: "Guru SEJ" },
   ];
+
+  // ═══════════════════════════════════════════════
+  // TAMBAH GAMBAR/VIDEO DI SINI
+  // Format: { url: 'memory/NAMA_FAIL', name: 'Tajuk', type: 'image' atau 'video' }
+  // ═══════════════════════════════════════════════
+  const memoryItems = [
+    // CONTOH — padam atau ganti dengan fail kamu sendiri:
+    // { url: 'memory/jadual.jpg',  name: 'jadual',     type: 'image' },
+    // { url: 'memory/gambar2.jpg',  name: 'Majlis Kelas',        type: 'image' },
+    // { url: 'memory/video1.mp4',   name: 'Video Gotong Royong', type: 'video' },
+  ];
+  // ═══════════════════════════════════════════════
+
+  let currentFilter = 'all';
+  let lightboxIndex = -1;
+  let filteredItems = [];
 
   function renderStudents(list) {
     const container = document.getElementById('studentList');
@@ -1012,38 +1005,22 @@
     el.classList.add('active');
   }
 
-  // ── MEMORY SYSTEM ──
-  let memoryItems = [];
-  let currentFilter = 'all';
-  let lightboxIndex = -1;
-
-  function handleUpload(event) {
-    const files = Array.from(event.target.files);
-    files.forEach(file => {
-      const url = URL.createObjectURL(file);
-      const type = file.type.startsWith('video') ? 'video' : 'image';
-      memoryItems.push({ url, name: file.name, type });
-    });
-    event.target.value = '';
-    renderMemory();
-  }
-
+  // ── MEMORY ──
   function renderMemory() {
     const grid = document.getElementById('memoryGrid');
-    const empty = document.getElementById('memoryEmpty');
-    const filtered = memoryItems.filter(m => currentFilter === 'all' || m.type === currentFilter);
+    filteredItems = memoryItems.filter(m => currentFilter === 'all' || m.type === currentFilter);
 
-    if (filtered.length === 0) {
-      grid.innerHTML = '';
-      grid.appendChild(empty);
-      empty.style.display = 'block';
+    if (filteredItems.length === 0) {
+      grid.innerHTML = `
+        <div class="memory-empty">
+          <div class="empty-icon">🗂️</div>
+          <p> Tiada Gambar Lagi. <br> Sila PM admin untuk menambah gambar </br> </p>
+        </div>`;
       return;
     }
 
-    empty.style.display = 'none';
     grid.innerHTML = '';
-    filtered.forEach((item, i) => {
-      const realIndex = memoryItems.indexOf(item);
+    filteredItems.forEach((item, i) => {
       const el = document.createElement('div');
       el.className = 'memory-item';
       el.innerHTML = `
@@ -1057,10 +1034,9 @@
           </span>
         </div>
       `;
-      el.onclick = () => openLightbox(realIndex);
+      el.onclick = () => openLightbox(i);
       grid.appendChild(el);
     });
-    grid.appendChild(empty);
   }
 
   function filterMemory(type, btn) {
@@ -1072,14 +1048,22 @@
 
   function openLightbox(index) {
     lightboxIndex = index;
-    const item = memoryItems[index];
+    const item = filteredItems[index];
     const content = document.getElementById('lightboxContent');
     content.innerHTML = item.type === 'image'
       ? `<img src="${item.url}" alt="${item.name}" />`
-      : `<video src="${item.url}" controls autoplay style="max-width:90vw;max-height:80vh;border-radius:10px;"></video>`;
+      : `<video src="${item.url}" controls autoplay style="max-width:90vw;max-height:82vh;border-radius:10px;"></video>`;
     document.getElementById('lightboxName').textContent = item.name;
-    document.getElementById('lightboxDelete').onclick = () => deleteMemory(index);
+    document.getElementById('btnPrev').disabled = index === 0;
+    document.getElementById('btnNext').disabled = index === filteredItems.length - 1;
     document.getElementById('lightbox').classList.add('open');
+  }
+
+  function navigateLight(dir) {
+    const newIndex = lightboxIndex + dir;
+    if (newIndex >= 0 && newIndex < filteredItems.length) {
+      openLightbox(newIndex);
+    }
   }
 
   function closeLightbox(e) {
@@ -1089,12 +1073,7 @@
     }
   }
 
-  function deleteMemory(index) {
-    memoryItems.splice(index, 1);
-    document.getElementById('lightbox').classList.remove('open');
-    document.getElementById('lightboxContent').innerHTML = '';
-    renderMemory();
-  }
+  renderMemory();
 </script>
 </body>
 </html>
