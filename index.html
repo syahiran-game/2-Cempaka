@@ -17,7 +17,6 @@
       overflow: hidden;
     }
 
-    /* ── SIDEBAR ── */
     .sidebar {
       width: 240px;
       background: #0d1f3c;
@@ -85,9 +84,7 @@
       font-weight: 600;
     }
 
-    .nav-item.active .nav-icon {
-      color: #4da6ff;
-    }
+    .nav-item.active .nav-icon { color: #4da6ff; }
 
     .nav-icon {
       font-size: 17px;
@@ -95,7 +92,6 @@
       text-align: center;
     }
 
-    /* ── MAIN CONTENT ── */
     .main {
       flex: 1;
       overflow-y: auto;
@@ -111,10 +107,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── PAGE HEADER ── */
-    .page-header {
-      margin-bottom: 32px;
-    }
+    .page-header { margin-bottom: 32px; }
 
     .page-header h1 {
       font-size: 26px;
@@ -134,7 +127,6 @@
       margin: 16px 0 28px;
     }
 
-    /* ── MAIN PAGE ── */
     .welcome-card {
       background: linear-gradient(135deg, #1a3a6e 0%, #0d2a52 100%);
       border: 1px solid #2a4f7a;
@@ -153,6 +145,7 @@
       color: #8aaec8;
       line-height: 1.7;
       font-size: 14px;
+      margin-top: 6px;
     }
 
     .info-grid {
@@ -195,7 +188,6 @@
       margin-top: 3px;
     }
 
-    /* ── CHART (ORG CHART) ── */
     .org-chart {
       display: flex;
       flex-direction: column;
@@ -254,23 +246,6 @@
       margin: 0 auto;
     }
 
-    .org-connector-h {
-      display: flex;
-      justify-content: center;
-      position: relative;
-      margin-bottom: 0;
-    }
-
-    .org-connector-h::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      height: 1px;
-      background: #1e3a5f;
-      left: 50%;
-      right: 50%;
-    }
-
     .ajk-row {
       display: flex;
       gap: 10px;
@@ -283,7 +258,6 @@
       background: #0d1a2e;
     }
 
-    /* ── LIST NAME ── */
     .search-bar {
       display: flex;
       align-items: center;
@@ -296,9 +270,7 @@
       transition: border-color 0.2s;
     }
 
-    .search-bar:focus-within {
-      border-color: #2a6ab5;
-    }
+    .search-bar:focus-within { border-color: #2a6ab5; }
 
     .search-bar input {
       background: none;
@@ -353,7 +325,6 @@
       color: #c8dff0;
     }
 
-    /* ── TEACHER NAME ── */
     .teacher-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -415,7 +386,6 @@
       margin: 3px 3px 0 0;
     }
 
-    /* MODAL */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -497,7 +467,6 @@
     .detail-label { color: #4a6b8a; flex-shrink: 0; }
     .detail-value { color: #c8dff0; text-align: right; max-width: 220px; }
 
-    /* ── JADUAL ── */
     .jadual-container {
       background: #0d1f3c;
       border: 1px solid #1e3a5f;
@@ -517,15 +486,221 @@
       font-size: 12px;
       color: #4a6b8a;
     }
+
+    /* ── MEMORY ── */
+    .memory-upload-area {
+    border: 2px dashed #1e3a5f;
+    border-radius: 14px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 28px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    }
+
+    .memory-upload-area:hover {
+      border-color: #4da6ff;
+      background: #0d1f3c;
+    }
+
+    .memory-upload-area .upload-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .memory-upload-area p {
+      color: #6b8cad;
+      font-size: 14px;
+    }
+
+    .memory-upload-area span {
+      color: #4da6ff;
+      font-weight: 600;
+    }
+
+    .memory-upload-area input[type="file"] {
+      display: none;
+    }
+
+    .memory-filter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 20px;
+      border: 1px solid #1e3a5f;
+      background: transparent;
+      color: #8aaec8;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #1a4a7a;
+      border-color: #4da6ff;
+      color: #ffffff;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .memory-item {
+      background: #0d1f3c;
+      border: 1px solid #1e3a5f;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .memory-item:hover {
+      border-color: #4da6ff;
+      transform: translateY(-4px);
+    }
+
+    .memory-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .memory-item video {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+
+    .memory-item-info {
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .memory-item-name {
+      font-size: 12px;
+      color: #8aaec8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 140px;
+    }
+
+    .memory-type-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .badge-img {
+      background: #1a3a6e;
+      color: #4da6ff;
+    }
+
+    .badge-vid {
+      background: #2a1a3e;
+      color: #a07af5;
+    }
+
+    .memory-empty {
+      text-align: center;
+      padding: 60px 0;
+      color: #4a6b8a;
+    }
+
+    .memory-empty .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .memory-empty p {
+      font-size: 14px;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .lightbox.open {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .lightbox img, .lightbox video {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: #1a3557;
+      border: none;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover { background: #2a5580; }
+
+    .lightbox-name {
+      color: #8aaec8;
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    .delete-btn {
+      background: #2a1a1a;
+      border: 1px solid #5f1e1e;
+      color: #f57a7a;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    .delete-btn:hover { background: #3a2020; }
   </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
   <div class="sidebar-header">
     <h2>📚 Kelas Saya</h2>
-    <p> 2 Cempaka</p>
+    <p>2 Cempaka</p>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-label">Menu</div>
@@ -539,28 +714,30 @@
       <span class="nav-icon">👥</span> List Name
     </div>
     <div class="nav-item" onclick="showPage('teacher', this)">
-      <span class="nav-icon">👩‍🎓</span> Teacher Name
+      <span class="nav-icon">👨‍🎓</span> Teacher Name
     </div>
     <div class="nav-item" onclick="showPage('jadual', this)">
       <span class="nav-icon">🗓️</span> Jadual Kelas
     </div>
+    <div class="nav-item" onclick="showPage('memory', this)">
+      <span class="nav-icon">💭</span> Memory
+    </div>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="main">
 
   <!-- PAGE: MAIN -->
   <div id="page-main" class="page active">
     <div class="page-header">
       <h1>Selamat Datang 👋</h1>
-      <p>Portal rasmi Kelas  2 Cempaka</p>
+      <p>Portal rasmi Kelas 2 Cempaka</p>
     </div>
     <div class="divider"></div>
     <div class="welcome-card">
-      <h2> 2 Cempaka </h2>
+      <h2>2 Cempaka</h2>
       <p>Selamat datang ke portal kelas kami. Di sini anda boleh melihat carta organisasi kelas, senarai nama murid, maklumat guru, dan jadual waktu kelas. Gunakan menu di sebelah kiri untuk navigasi.</p>
-      <p> << Disclaimer => Untuk Android/IOS device sila Rotate Screen anda untuk lebih jelas >> </p>
+      <p>&lt;&lt; Disclaimer =&gt; Untuk Android/IOS device sila Rotate Screen anda untuk lebih jelas &gt;&gt;</p>
     </div>
     <div class="info-grid">
       <div class="info-card">
@@ -585,47 +762,38 @@
   <div id="page-chart" class="page">
     <div class="page-header">
       <h1>Carta Organisasi Kelas</h1>
-      <p>Struktur jawatan dalam  2 Cempaka</p>
+      <p>Struktur jawatan dalam 2 Cempaka</p>
     </div>
     <div class="divider"></div>
     <div class="org-chart">
-
       <div class="org-level">
         <div class="org-box highlight">
           <div class="role">Guru Kelas</div>
           <div class="name">NURFADILAH BINTI ISMAIL</div>
         </div>
       </div>
-
       <div class="org-connector"></div>
-
       <div class="org-level">
         <div class="org-box highlight">
           <div class="role">Penolong Guru Kelas</div>
           <div class="name">NOR SYAREAH BINTI MUHAMMAD</div>
         </div>
       </div>
-
       <div class="org-connector"></div>
-
       <div class="org-level">
         <div class="org-box">
           <div class="role">Ketua Kelas</div>
           <div class="name">Che Zaimhaikal'Izz</div>
         </div>
       </div>
-
       <div class="org-connector"></div>
-
       <div class="org-level">
         <div class="org-box">
           <div class="role">Penolong Ketua Kelas</div>
           <div class="name">Nur Amni Sulha</div>
         </div>
       </div>
-
       <div class="org-connector"></div>
-
       <div class="org-level" style="gap:20px">
         <div class="org-box">
           <div class="role">Setiausaha</div>
@@ -644,9 +812,7 @@
           <div class="name">Izzara Insyirah</div>
         </div>
       </div>
-
       <div class="org-connector"></div>
-
       <div style="font-size:11px;color:#4a6b8a;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">AJK Kelas</div>
       <div class="ajk-row">
         <div class="org-box">
@@ -666,7 +832,6 @@
           <div class="name">Aisyah</div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -674,7 +839,7 @@
   <div id="page-listname" class="page">
     <div class="page-header">
       <h1>Senarai Nama Murid</h1>
-      <p>Semua pelajar  2 Cempaka</p>
+      <p>Semua pelajar 2 Cempaka</p>
     </div>
     <div class="divider"></div>
     <div class="search-bar">
@@ -698,7 +863,7 @@
   <div id="page-jadual" class="page">
     <div class="page-header">
       <h1>Jadual Waktu Kelas</h1>
-      <p>Jadual rasmi  2 Cempaka</p>
+      <p>Jadual rasmi 2 Cempaka</p>
     </div>
     <div class="divider"></div>
     <div class="jadual-container">
@@ -707,9 +872,38 @@
     </div>
   </div>
 
+  <!-- PAGE: MEMORY -->
+  <div id="page-memory" class="page">
+    <div class="page-header">
+      <h1>Memory 💭</h1>
+      <p>Kenangan indah bersama 2 Cempaka</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="memory-upload-area" onclick="document.getElementById('memoryUpload').click()">
+      <div class="upload-icon">📁</div>
+      <p><span>klik untuk muat naik</span></p>
+      <p style="font-size:12px; margin-top:6px;">Sokong: JPG, PNG, GIF, MP4, MOV, WEBM</p>
+      <input type="file" id="memoryUpload" accept="image/*,video/*" multiple onchange="handleUpload(event)" />
+    </div>
+
+    <div class="memory-filter">
+      <button class="filter-btn active" onclick="filterMemory('all', this)">Semua</button>
+      <button class="filter-btn" onclick="filterMemory('image', this)">🖼️ Gambar</button>
+      <button class="filter-btn" onclick="filterMemory('video', this)">🎬 Video</button>
+    </div>
+
+    <div class="memory-grid" id="memoryGrid">
+      <div class="memory-empty" id="memoryEmpty">
+        <div class="empty-icon">🗂️</div>
+        <p>Tiada kenangan lagi. Muat naik gambar atau video!</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<!-- MODAL TEACHER DETAIL -->
+<!-- MODAL TEACHER -->
 <div class="modal-overlay" id="teacherModal" onclick="closeModal(event)">
   <div class="modal">
     <button class="modal-close" onclick="document.getElementById('teacherModal').classList.remove('open')">✕</button>
@@ -719,28 +913,39 @@
   </div>
 </div>
 
+<!-- LIGHTBOX MEMORY -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('open')">✕</button>
+  <div id="lightboxContent"></div>
+  <p class="lightbox-name" id="lightboxName"></p>
+  <button class="delete-btn" id="lightboxDelete">🗑️ Padam</button>
+</div>
+
 <script>
-  // ── DATA MURID ──
   const students = [
-    "Che Ashraaf Zakwan", "Che Zaimhaikal'Izz", "Dhea Aleesya Az-Zahra", "Muhammad Syakir Akalil", "Nik Muhamad Ikhwan", "Muhammad Aqib Rizqin", "Muhammad Irman Rifqi", "Muhammad Syahiran Mukmin", "Muhammad Naqib Najmi", "Farhan", "Nor Syakiren", "Nur Elisya Umairah", "Nur Zara Batrisya", "Nur Mia Atiesya", "Nur Lydia Delisya", "Nur Izzara Insyirah", "Nur Aisyah Robayah", "Nur Dieyan Arissa", "Nur Qaseh Qalesya", "Nur Zara Humaira", "Nur Amalina Batrisya", "Nur Najmina Suhada", "Nur Aida Zafarina", "Nik Puteri Balqis Batrisya", "Nur Amni Sulha", "Nur Izzara Aisyah", "Nur Wardina Al-Zahra", "Muhammad Ilham Uzair"
+    "Che Ashraaf Zakwan","Che Zaimhaikal'Izz","Dhea Aleesya Az-Zahra","Muhammad Syakir Akalil",
+    "Nik Muhamad Ikhwan","Muhammad Aqib Rizqin","Muhammad Irman Rifqi","Muhammad Syahiran Mukmin",
+    "Muhammad Naqib Najmi","Farhan","Nor Syakiren","Nur Elisya Umairah",
+    "Nur Zara Batrisya","Nur Mia Atiesya","Nur Lydia Delisya","Nur Izzara Insyirah",
+    "Nur Aisyah Robayah","Nur Dieyan Arissa","Nur Qaseh Qalesya","Nur Zara Humaira",
+    "Nur Amalina Batrisya","Nur Najmina Suhada","Nur Aida Zafarina","Nik Puteri Balqis Batrisya",
+    "Nur Amni Sulha","Nur Izzara Aisyah","Nur Wardina Al-Zahra","Muhammad Ilham Uzair"
   ];
 
-  // ── DATA GURU ──
   const teachers = [
-    { name: "NURFADILAH BINTI ISMAIL",   subjects: ["Bahasa Inggeris"],            info: "Guru Kelas" },
-    { name: "NOR SYAREAH BINTI MUHAMMAD",     subjects: ["Bahasa Melayu"],                info: "Penolong Guru Kelas" },
-    { name: "ROSASLIZA BT ABD LLAH",           subjects: ["ASK & SAINS"],       info: "Guru ASK & SAINS" },
-    { name: "AMIRATUL FATIHAH BINTI AZUHAN",            subjects: ["Bahasa Arab"],            info: "Guru Praktikal BA" },
-    { name: "NOR AZIZON BT MOHAMMAD YUSOFF",     subjects: ["Bahasa Arab"],                    info: "Guru Bahasa Arab" },
-    { name: "MOHAMAD AMIRUL HASAN BIN IDRIS",          subjects: ["GEOGRAFI"],                  info: "Guru Praktikal GEO" },
-    { name: "MOHAMAD BIN ISMAIL",        subjects: ["GEOGRAFI"],         info: "Guru Geografi" },
-    { name: "ROHANA BINTI HUSSIN",           subjects: ["KKQ"],       info: "Guru KKQ" },
-    { name: "ZAUNAIDAH BINTI ABDDUL RAHMAN",           subjects: ["MATEMATIK"],       info: "Guru MT" },
-    { name: "NUR ILYANI BT HUSSIN",           subjects: ["RBT"],       info: "Guru RBT" },
-    { name: "NAJIAH BT ABD GHANI",           subjects: ["SEJARAH"],       info: "Guru SEJ" },
+    { name: "NURFADILAH BINTI ISMAIL",            subjects: ["Bahasa Inggeris"],  info: "Guru Kelas" },
+    { name: "NOR SYAREAH BINTI MUHAMMAD",          subjects: ["Bahasa Melayu"],    info: "Penolong Guru Kelas" },
+    { name: "ROSASLIZA BT ABD LLAH",               subjects: ["ASK & SAINS"],      info: "Guru ASK & SAINS" },
+    { name: "AMIRATUL FATIHAH BINTI AZUHAN",       subjects: ["Bahasa Arab"],      info: "Guru Praktikal BA" },
+    { name: "NOR AZIZON BT MOHAMMAD YUSOFF",       subjects: ["Bahasa Arab"],      info: "Guru Bahasa Arab" },
+    { name: "MOHAMAD AMIRUL HASAN BIN IDRIS",      subjects: ["GEOGRAFI"],         info: "Guru Praktikal GEO" },
+    { name: "MOHAMAD BIN ISMAIL",                  subjects: ["GEOGRAFI"],         info: "Guru Geografi" },
+    { name: "ROHANA BINTI HUSSIN",                 subjects: ["KKQ"],              info: "Guru KKQ" },
+    { name: "ZAUNAIDAH BINTI ABDDUL RAHMAN",       subjects: ["MATEMATIK"],        info: "Guru MT" },
+    { name: "NUR ILYANI BT HUSSIN",                subjects: ["RBT"],              info: "Guru RBT" },
+    { name: "NAJIAH BT ABD GHANI",                 subjects: ["SEJARAH"],          info: "Guru SEJ" },
   ];
 
-  // ── RENDER STUDENTS ──
   function renderStudents(list) {
     const container = document.getElementById('studentList');
     container.innerHTML = list.map((name, i) => `
@@ -757,7 +962,6 @@
     renderStudents(students.filter(n => n.toLowerCase().includes(q)));
   }
 
-  // ── RENDER TEACHERS ──
   const grid = document.getElementById('teacherGrid');
   teachers.forEach((t, i) => {
     const initials = t.name.split(' ').slice(-2).map(w => w[0]).join('').toUpperCase();
@@ -774,7 +978,6 @@
     `;
   });
 
-  // ── MODAL ──
   function openModal(i) {
     const t = teachers[i];
     const initials = t.name.split(' ').slice(-2).map(w => w[0]).join('').toUpperCase();
@@ -802,12 +1005,95 @@
       document.getElementById('teacherModal').classList.remove('open');
   }
 
-  // ── NAVIGATION ──
   function showPage(id, el) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     el.classList.add('active');
+  }
+
+  // ── MEMORY SYSTEM ──
+  let memoryItems = [];
+  let currentFilter = 'all';
+  let lightboxIndex = -1;
+
+  function handleUpload(event) {
+    const files = Array.from(event.target.files);
+    files.forEach(file => {
+      const url = URL.createObjectURL(file);
+      const type = file.type.startsWith('video') ? 'video' : 'image';
+      memoryItems.push({ url, name: file.name, type });
+    });
+    event.target.value = '';
+    renderMemory();
+  }
+
+  function renderMemory() {
+    const grid = document.getElementById('memoryGrid');
+    const empty = document.getElementById('memoryEmpty');
+    const filtered = memoryItems.filter(m => currentFilter === 'all' || m.type === currentFilter);
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '';
+      grid.appendChild(empty);
+      empty.style.display = 'block';
+      return;
+    }
+
+    empty.style.display = 'none';
+    grid.innerHTML = '';
+    filtered.forEach((item, i) => {
+      const realIndex = memoryItems.indexOf(item);
+      const el = document.createElement('div');
+      el.className = 'memory-item';
+      el.innerHTML = `
+        ${item.type === 'image'
+          ? `<img src="${item.url}" alt="${item.name}" loading="lazy" />`
+          : `<video src="${item.url}" muted preload="metadata"></video>`}
+        <div class="memory-item-info">
+          <span class="memory-item-name">${item.name}</span>
+          <span class="memory-type-badge ${item.type === 'image' ? 'badge-img' : 'badge-vid'}">
+            ${item.type === 'image' ? '🖼️' : '🎬'}
+          </span>
+        </div>
+      `;
+      el.onclick = () => openLightbox(realIndex);
+      grid.appendChild(el);
+    });
+    grid.appendChild(empty);
+  }
+
+  function filterMemory(type, btn) {
+    currentFilter = type;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMemory();
+  }
+
+  function openLightbox(index) {
+    lightboxIndex = index;
+    const item = memoryItems[index];
+    const content = document.getElementById('lightboxContent');
+    content.innerHTML = item.type === 'image'
+      ? `<img src="${item.url}" alt="${item.name}" />`
+      : `<video src="${item.url}" controls autoplay style="max-width:90vw;max-height:80vh;border-radius:10px;"></video>`;
+    document.getElementById('lightboxName').textContent = item.name;
+    document.getElementById('lightboxDelete').onclick = () => deleteMemory(index);
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function closeLightbox(e) {
+    if (e.target.id === 'lightbox') {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lightboxContent').innerHTML = '';
+    }
+  }
+
+  function deleteMemory(index) {
+    memoryItems.splice(index, 1);
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightboxContent').innerHTML = '';
+    renderMemory();
   }
 </script>
 </body>
